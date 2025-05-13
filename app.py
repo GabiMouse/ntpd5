@@ -19,7 +19,7 @@ class IrisInput(BaseModel):
 
 @app.route('/', methods=["GET"])
 def hello_world():  # put application's code here
-    return {"message": "Witaj w NTPD3!"}
+    return {"message": "Witaj w NTPD5!"}
 
 @app.route("/env", methods=["GET"])
 def show_env_variable():
