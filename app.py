@@ -1,7 +1,14 @@
+import os
 from flask import Flask, jsonify, request
 import pickle
 from pydantic import BaseModel, ValidationError
 import numpy as np
+from dotenv import load_dotenv
+
+load_dotenv()
+
+API_KEY = os.getenv("API_KEY")
+DATABASE_URI = os.getenv("DATABASE_URI")
 
 with open("model.pkl", "rb") as f:
     scaler, model = pickle.load(f)
