@@ -17,18 +17,18 @@ class IrisInput(BaseModel):
     petal_length: float
     petal_width: float
 
-@app.route('/')
+@app.route('/', methods=["GET"])
 def hello_world():  # put application's code here
     return {"message": "Witaj w NTPD3!"}
 
-@app.route("/env")
+@app.route("/env", methods=["GET"])
 def show_env_variable():
     value = os.environ.get('MY_ENV_VAR')
     if value is None:
         value = "no value"
     return jsonify({"message": value}), 200
-    
-@app.post("/predict")
+
+@app.route("/predict", methods=["GET"])
 def predict():
     try:
 
