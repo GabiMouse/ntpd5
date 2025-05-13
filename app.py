@@ -3,12 +3,8 @@ from flask import Flask, jsonify, request
 import pickle
 from pydantic import BaseModel, ValidationError
 import numpy as np
-from dotenv import load_dotenv
 
-load_dotenv()
 
-API_KEY = os.getenv("API_KEY")
-DATABASE_URI = os.getenv("DATABASE_URI")
 
 with open("model.pkl", "rb") as f:
     scaler, model = pickle.load(f)
@@ -24,6 +20,11 @@ class IrisInput(BaseModel):
 @app.route('/')
 def hello_world():  # put application's code here
     return {"message": "Witaj w NTPD3!"}
+
+@app.route("/env")
+def show_env_variable():
+    value = os.getenv("MY_ENV_VAR", "Brak zmiennej środowiskowej")
+    return jsonify({"message": f"Hello {value}"})
 
 @app.post("/predict")
 def predict():
