@@ -23,9 +23,11 @@ def hello_world():  # put application's code here
 
 @app.route("/env")
 def show_env_variable():
-    value = os.environ.get("MY_ENV_VAR", "Brak zmiennej środowiskowej")
-    return jsonify({"message": f"Hello {value}"})
-
+    value = os.environ.get('MY_ENV_VAR')
+    if value is None:
+        value = "no value"
+    return jsonify({"message": value}), 200
+    
 @app.post("/predict")
 def predict():
     try:
